@@ -17,5 +17,6 @@ module.exports = (app, db) => {
     app.post('/', dreamhookc.signUpCheck);
     app.post('/index', userindexc.login);
     app.post('/thread/:id', threadsc.getSingleThread);
-    // app.post('/thread/new', threadsc.addComments);
+    app.post('/thread/:id/new', threadsc.addComments);
+    app.get('/logout', userindexc.logout);
 };

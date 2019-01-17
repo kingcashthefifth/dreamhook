@@ -18,9 +18,11 @@ module.exports = (db) => {
     };
 
     let addComments = (request, response) => {
-        db.addcommentsm.addComments(request, (error, everything) => {
-            response.render('singlethread', {
-                everything
+        db.addcommentsm.addComments(request, (error, result) => {
+            db.threadsm.getSingleThread(request, (error, everything) => {
+                response.render('singlethread', {
+                    everything
+                });
             });
         });
     };

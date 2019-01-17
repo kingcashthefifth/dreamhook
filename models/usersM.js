@@ -1,9 +1,10 @@
 module.exports = (dbPoolInstance) => {
 
     let mainPageInfo = (request, callback) => {
+        console.log('usersm.mainPageInfo starting');
         // const threadId = request.params.id
         // const values = [type_id];
-        let query = `SELECT * FROM users;`;
+        let query = `SELECT * FROM users where id='${request.cookies['user_id']}';`;
         let query2 = `select threadtitle.id, threadtitle.title, users.username from threadtitle inner join users on (threadtitle.author_id = users.id);`;
         let query3 = `SELECT * FROM threadcomments;`;
         let userPageArr = [];
@@ -12,14 +13,7 @@ module.exports = (dbPoolInstance) => {
                 callback(error, null);
             } else {
                 if (queryResult.rows.length > 0) {
-                    for (i = 0; i < queryResult.rows.length; i++) {
-                        if (queryResult.rows[i].username == request.body.username && queryResult.rows[i].password == request.body.password) {
-                            let tempArr = [
-                                queryResult.rows[i]
-                            ];
-                            userPageArr.push(tempArr);
-                        }
-                    }
+                    userPageArr.push(queryResult.rows);
                     dbPoolInstance.query(query2, (error2, queryResult2) => {
                         if (error2) {
                             callback(error2, null);

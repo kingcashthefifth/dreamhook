@@ -9,10 +9,10 @@ module.exports = (dbPoolInstance) => {
         console.log('reached threadsM starting')
         let threadArr = [];
         const threadId = request.params.id;
-        const userId = request.body.username;
-        console.log(request.params.id);
-        console.log(request.body.username);
-        let query = `select * from users where username='${userId}';`;
+        const userId = request.body.userid;
+        console.log('threadId is :', request.params.id);
+        console.log('userId is: ', request.body.userid);
+        let query = `select * from users where id='${userId}';`;
         let query2 = `select threadtitle.title, threadtitle.authorcontent, users.username, threadtitle.id from threadtitle inner join users on (threadtitle.author_id = users.id) where threadtitle.id='${threadId}';`;
         let query3 = `select users.username, threadcomments.comments, threadcomments.thread_id from users inner join threadcomments on (users.id = threadcomments.author_id) inner join threadtitle on (threadcomments.thread_id = threadtitle.id) where thread_id='${threadId}';`;
         dbPoolInstance.query(query, (error, queryResult) => {

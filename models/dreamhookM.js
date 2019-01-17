@@ -23,7 +23,8 @@ module.exports = (dbPoolInstance) => {
                 // invoke callback function with results after query has executed
 
                 if (queryResult.rows.length > 0) {
-                    callback(null, queryResult.rows);
+                    let result = 'normal';
+                    callback(null, result);
 
                 } else {
                     callback(null, null);
@@ -53,7 +54,8 @@ module.exports = (dbPoolInstance) => {
                     if (error2) {
                         callback(error2, null);
                     } else {
-                        callback(null, queryResult2.rows);
+                        let result = 'newsignup'
+                        callback(null, result);
                     };
                 });
             };

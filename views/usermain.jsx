@@ -22,7 +22,7 @@ class Usermain extends React.Component {
                 <small>@{obj.username}</small>
               </div>
               <p className="mb-1">{obj.title}</p>
-              <input name="username" defaultValue={userObj[0].username} style={{ display: "none" }}></input>
+              <input name="userid" defaultValue={userObj[0].id} style={{ display: "none" }}></input>
             </button>
           </div>
         </form>
@@ -48,11 +48,16 @@ class Usermain extends React.Component {
         </head>
         <body>
           <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
-            {/* <li className="nav-item" style={{ margin: "auto 5px" }}>
-              <a className="nav-link active" href="/artist/">
-                Login
+            <li className="nav-item" style={{ margin: "auto 5px" }}>
+              <a className="nav-link active" href="/">
+                Home
               </a>
-            </li> */}
+            </li>
+            <li className="nav-item" style={{ margin: "auto 5px" }}>
+              <a className="nav-link" href="/logout">
+                Logout
+              </a>
+            </li>
           </ul>
           <div className="jumbotron">
             <h1 className="display-4 text-center">Hello, {userObj[0].firstname}!</h1>

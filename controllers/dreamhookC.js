@@ -7,11 +7,23 @@ module.exports = (db) => {
      */
 
     let index = (request, response) => {
-        db.dreamhookm.getEverything((error, everything) => {
-            console.log(everything);
-            response.render('main', {
-                everything
-            });
+        db.dreamhookm.getEverything((error, result) => {
+            console.log(result);
+            let sessionCookie = request.cookies['dh_session'];
+            let userCookie = request.cookies['user_id'];
+            if (sessionCookie == undefined) {
+                response.render('main', {
+                    result
+                });
+            } else {
+                db.usersm.mainPageInfo(request, (error2, everything) => {
+                    console.log(everything)
+                    // response.send(everything);
+                    response.render('usermain', {
+                        everything
+                    });
+                });
+            };
         });
     };
 
@@ -22,7 +34,7 @@ module.exports = (db) => {
     let signUpCheck = (request, response) => {
         db.dreamhookm.signUpCheck(request, (error, result) => {
             console.log(result);
-            response.render('signupsuccess', {
+            response.render('main', {
                 result
             });
         });

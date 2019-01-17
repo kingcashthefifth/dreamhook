@@ -88,7 +88,7 @@ class Singlethread extends React.Component {
               {allThreadComments}
             </ul>
             <hr className="my-4" />
-            <form action={"/thread/new" + threadTitleObj.id} method="post">
+            <form action={"/thread/" + threadTitleObj[0].id + "/new"} method="post">
               <div className="form-group">
                 <input name="userid" defaultValue={userObj[0].id} style={{ display: "none" }}></input>
                 <label for="textareaform">

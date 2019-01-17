@@ -2,7 +2,7 @@ const pg = require('pg');
 const dreamhookm = require('./models/dreamhookM');
 const usersm = require('./models/usersM');
 const threadsm = require('./models/threadsM');
-// const addcommentsm = require('./models/addcommentsM');
+const addcommentsm = require('./models/addcommentsM');
 const url = require('url');
 
 
@@ -45,7 +45,7 @@ module.exports = {
     dreamhookm: dreamhookm(pool),
     usersm: usersm(pool),
     threadsm: threadsm(pool),
-    // addcommentsm: addcommentsm(pool),
+    addcommentsm: addcommentsm(pool),
 
 
     //make queries directly from here

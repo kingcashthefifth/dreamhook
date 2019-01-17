@@ -2,6 +2,15 @@ var React = require("react");
 
 class Main extends React.Component {
   render() {
+    let signupAlert;
+    if (this.props.result == 'newsignup') {
+      signupAlert = <div className="alert alert-warning alert-dismissible fade show position-absolute" style={{ width: "100%" }} role="alert">
+        <strong>Sign up successful!</strong> Please login and start hooking your dreams!
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    }
     return (
       <html>
         <head>
@@ -27,6 +36,7 @@ class Main extends React.Component {
               </a>
             </li>
           </ul>
+          {signupAlert}
           <div className="jumbotron">
             <h1 className="display-4 text-center">Welcome to Dream Hook!</h1>
             <p className="lead text-center">Where dream chasers gather.</p>
