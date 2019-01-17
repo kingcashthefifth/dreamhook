@@ -15,10 +15,18 @@ module.exports = (db) => {
         });
     };
 
-    let signup = (request, response) => {
+    let signUp = (request, response) => {
         response.render('signup');
     };
 
+    let signUpCheck = (request, response) => {
+        db.dreamhookm.signUpCheck(request, (error, result) => {
+            console.log(result);
+            response.render('signupsuccess', {
+                result
+            });
+        });
+    };
 
     /**
      * ===========================================
@@ -28,7 +36,8 @@ module.exports = (db) => {
 
     return {
         index,
-        signup,
+        signUp,
+        signUpCheck,
     };
 
 }

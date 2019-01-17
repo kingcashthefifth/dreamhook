@@ -1,16 +1,7 @@
 var React = require("react");
 
-class Usermain extends React.Component {
+class Signupsuccess extends React.Component {
   render() {
-    let userObj = this.props.everything[0];
-    let threadTitleObj = this.props.everything[1];
-    let threadCommentObj = this.props.everything[2];
-
-    const tweets = tweetObj.map((obj, index) => {
-      return (
-        <p className="lead">{obj.tweet}</p>
-      )
-    })
     return (
       <html>
         <head>
@@ -26,37 +17,42 @@ class Usermain extends React.Component {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="../style.css" />
-          <title>Tunr Express</title>
+          <title>Dream Hook</title>
         </head>
         <body>
           <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
-            {/* <li className="nav-item" style={{ margin: "auto 5px" }}>
-              <a className="nav-link active" href="/artist/">
-                Login
+            <li className="nav-item" style={{ margin: "auto 5px" }}>
+              <a className="nav-link active" href="/">
+                Home
               </a>
-            </li> */}
+            </li>
           </ul>
+          <div class="alert alert-warning alert-dismissible fade show position-absolute" style={{ width: "100%" }} role="alert">
+            <strong>Sign up successful!</strong> Please login and start hooking your dreams!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <div className="jumbotron">
-            <h1 className="display-4 text-center">Hello, {nameofuser}!</h1>
-            <form action="/newtweet" method="post">
-              <div className="form-group">
-                <label htmlFor="instrucTextArea">New Tweet</label>
-                <textarea
-                  name="tweet"
-                  className="form-control"
-                  id="instrucTextArea"
-                  rows="6"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
-                Submit
-              </button>
-            </form>
+            <h1 className="display-4 text-center">Welcome to Dream Hook!</h1>
+            <p className="lead text-center">Where dream chasers gather.</p>
             <hr className="my-4" />
-            {tweets}
+            <form action="/login" method="post">
+              <div className="row" style={{ width: "70%", marginLeft: "23%" }}>
+                <div className="col">
+                  <input name="username" className="form-control" placeholder="Username" />
+                  <small id="emailHelp" className="form-text text-muted">New to Dream Hook? <a href="/signup">Sign up</a></small>
+                </div>
+                <div className="col">
+                  <input name="password" className="form-control" placeholder="Password" />
+                </div>
+                <div className="col">
+                  <p className="lead">
+                    <button className="btn btn-primary" type="submit">Log In</button>
+                  </p>
+                </div>
+              </div>
+            </form>
           </div>
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -79,4 +75,4 @@ class Usermain extends React.Component {
   }
 }
 
-module.exports = Usermain;
+module.exports = Signupsuccess;

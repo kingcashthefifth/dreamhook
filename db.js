@@ -1,5 +1,6 @@
 const pg = require('pg');
 const dreamhookm = require('./models/dreamhookM');
+const usersm = require('./models/usersM');
 const url = require('url');
 
 
@@ -39,7 +40,8 @@ module.exports = {
     /*
      * ADD APP MODELS HERE
      */
-    drwamhookm: dreamhookm(pool),
+    dreamhookm: dreamhookm(pool),
+    usersm: usersm(pool),
 
 
     //make queries directly from here
