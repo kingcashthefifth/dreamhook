@@ -91,7 +91,7 @@ class Singlethread extends React.Component {
             <form action={"/thread/" + threadTitleObj[0].id + "/new"} method="post">
               <div className="form-group">
                 <input name="userid" defaultValue={userObj[0].id} style={{ display: "none" }}></input>
-                <label for="textareaform">
+                <label htmlFor="textareaform">
                   Add comments:
                 </label>
                 <textarea className="form-control" name="newcom" id="textareaform" rows="6"></textarea>
