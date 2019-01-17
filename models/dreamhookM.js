@@ -34,7 +34,7 @@ module.exports = (dbPoolInstance) => {
     };
 
     let signUpCheck = (request, callback) => {
-        let query = `insert into users (firstname, lastname, username, password, email) values ($1, $2, $3, $4, $5);`
+        let query = `insert into users (firstname, lastname, username, password, email) values ($1, $2, $3, $4, $5);`;
 
         let values = [
             request.body.firstname,
@@ -42,7 +42,7 @@ module.exports = (dbPoolInstance) => {
             request.body.username,
             request.body.password,
             request.body.email
-        ]
+        ];
 
         dbPoolInstance.query(query, values, (error, queryResult) => {
             if (error) {

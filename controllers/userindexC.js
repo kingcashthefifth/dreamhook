@@ -28,7 +28,7 @@ module.exports = (db) => {
                 db.usersm.mainPageInfo(request, (error, everything) => {
                     console.log(everything);
                     response.cookie('dh_session', 'true');
-                    response.send(everything);
+                    // response.send(everything);
                     response.render('usermain', {
                         everything
                     });

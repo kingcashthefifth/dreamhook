@@ -37,7 +37,7 @@ class Signupsuccess extends React.Component {
             <h1 className="display-4 text-center">Welcome to Dream Hook!</h1>
             <p className="lead text-center">Where dream chasers gather.</p>
             <hr className="my-4" />
-            <form action="/login" method="post">
+            <form action="/index" method="post">
               <div className="row" style={{ width: "70%", marginLeft: "23%" }}>
                 <div className="col">
                   <input name="username" className="form-control" placeholder="Username" />

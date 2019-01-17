@@ -4,7 +4,7 @@ module.exports = (dbPoolInstance) => {
         // const threadId = request.params.id
         // const values = [type_id];
         let query = `SELECT * FROM users;`;
-        let query2 = `SELECT * FROM threadtitle;`;
+        let query2 = `select threadtitle.id, threadtitle.title, users.username from threadtitle inner join users on (threadtitle.author_id = users.id);`;
         let query3 = `SELECT * FROM threadcomments;`;
         let userPageArr = [];
         dbPoolInstance.query(query, (error, queryResult) => {

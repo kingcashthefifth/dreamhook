@@ -17,7 +17,7 @@ class Signup extends React.Component {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="../style.css" />
-          <title>Tunr Express</title>
+          <title>Dream Hook</title>
         </head>
         <body>
           <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
@@ -31,7 +31,7 @@ class Signup extends React.Component {
           <h1 className="ml-5 p-3">Create a new account</h1>
           <br />
           <div className="m-auto" style={{ width: "95%" }}>
-            <form action="/signup/check" method="post">
+            <form action="/" method="post">
               <div className="form-group">
                 <label htmlFor="titleInput">Username</label>
                 <input

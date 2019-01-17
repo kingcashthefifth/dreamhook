@@ -6,9 +6,27 @@ class Usermain extends React.Component {
     let threadTitleObj = this.props.everything[1];
     let threadCommentObj = this.props.everything[2];
 
-    const tweets = tweetObj.map((obj, index) => {
+    const allThreadTitle = threadTitleObj.map((obj, index) => {
       return (
-        <p className="lead">{obj.tweet}</p>
+        // <a href={"/thread/" + obj.id} className="list-group-item list-group-item-action flex-column align-items-start">
+        //   <div className="d-flex w-100 justify-content-between">
+        //     <h5 className="mb-1"></h5>
+        //     <small name="username">{obj.username}</small>
+        //   </div>
+        //   <p className="mb-1">{obj.title}</p>
+        // </a>
+        <form action={"/thread/" + obj.id} method="post">
+          <div className="form-group">
+            <button type="submit" className="list-group-item list-group-item-action flex-column align-items-start">
+              <div className="d-flex w-100 text-right">
+                <small>@{obj.username}</small>
+              </div>
+              <p className="mb-1">{obj.title}</p>
+              <input name="username" defaultValue={userObj[0].username} style={{ display: "none" }}></input>
+            </button>
+          </div>
+        </form>
+
       )
     })
     return (
@@ -26,7 +44,7 @@ class Usermain extends React.Component {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="../style.css" />
-          <title>Tunr Express</title>
+          <title>Dream Hook</title>
         </head>
         <body>
           <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
@@ -37,8 +55,10 @@ class Usermain extends React.Component {
             </li> */}
           </ul>
           <div className="jumbotron">
-            <h1 className="display-4 text-center">Hello, {nameofuser}!</h1>
-            <form action="/newtweet" method="post">
+            <h1 className="display-4 text-center">Hello, {userObj[0].firstname}!</h1>
+            <p className="lead text-center">@{userObj[0].username}</p>
+            <small name="username" defaultValue={userObj[0].username} style={{ display: "none" }}></small>
+            {/* <form action="/newtweet" method="post">
               <div className="form-group">
                 <label htmlFor="instrucTextArea">New Tweet</label>
                 <textarea
@@ -54,9 +74,11 @@ class Usermain extends React.Component {
               >
                 Submit
               </button>
-            </form>
+            </form> */}
             <hr className="my-4" />
-            {tweets}
+            <div className="list-group">
+              {allThreadTitle}
+            </div>
           </div>
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
