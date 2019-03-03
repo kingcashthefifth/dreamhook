@@ -6,19 +6,106 @@ class Singlethread extends React.Component {
     let threadTitleObj = this.props.everything[1];
     let threadCommentObj = this.props.everything[2];
     console.log(threadCommentObj);
+
+    let changes;
     let allThreadComments;
+    let userDelete;
+    let userDeleteConfirm;
+
+    if (this.props.everything[3] !== undefined) {
+      if (this.props.everything[3][0] == 'deletedcomment') {
+        changes = <div className="alert alert-warning alert-dismissible fade show position-absolute" style={{ width: "100%" }} role="alert">
+          <strong>Comment deleted successfully! </strong>
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      } else if (this.props.everything[3][0] == 'editedcomment') {
+        changes = <div className="alert alert-warning alert-dismissible fade show position-absolute" style={{ width: "100%" }} role="alert">
+          <strong>Edited comment successfully! </strong>
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      } else if (this.props.everything[3][0] == 'addedcomment') {
+        changes = <div className="alert alert-warning alert-dismissible fade show position-absolute" style={{ width: "100%" }} role="alert">
+          <strong>Added comment successfully! </strong>
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      }
+    }
+
     if (threadCommentObj == 'nocomments') {
       allThreadComments = <p className="display-4 text-secondary">No comments yet~</p>
     } else {
       allThreadComments = threadCommentObj.map((obj, index) => {
-        return (
-          <li className="list-group-item list-group-item-action flex-column align-items-start">
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1"></h5>
-              <small name="username">@{obj.username}</small>
+        userDelete = undefined;
+        userDeleteConfirm = undefined;
+        if (userObj[0].id == obj.author_id) {
+          userDelete = <small className="ml-auto">
+            <a href={"#exampleModal" + obj.id} data-toggle="modal" className="close" style={{ fontSize: "1.1rem" }}>&#10005;</a>
+            <a href={"/editcomment/" + obj.id} className="close" style={{ fontSize: "1.1rem" }}>
+              &#9998; &nbsp;
+          </a>
+          </small>
+
+          userDeleteConfirm = <div
+            className="modal fade"
+            id={"exampleModal" + obj.id}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Delete confirmation
+                      </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  Do you wish to delete this comment?
+                    </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Back
+                      </button>
+                  <a href={"/deletecomment/" + obj.id} className="btn btn-primary">
+                    Delete
+                      </a>
+                </div>
+              </div>
             </div>
-            <p className="mb-1">{obj.comments}</p>
-          </li>
+          </div>
+
+        }
+        return (
+          <div>
+            <li className="list-group-item list-group-item-action align-items-start" style={{ marginBottom: "1px" }}>
+              <div className="d-flex flex-row justify-content-between" style={{ width: "100%" }}>
+                <h5 className="mb-1"></h5>
+                <small className="mr-auto">@{obj.username}</small>
+                {userDelete}
+              </div>
+              <p className="mb-1" style={{ width: "100%" }}>{obj.comments}</p>
+            </li>
+            {userDeleteConfirm}
+          </div>
 
 
           // <form action={"/thread/" + obj.id} method="post">
@@ -51,18 +138,38 @@ class Singlethread extends React.Component {
             integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossOrigin="anonymous"
           />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
           <link rel="stylesheet" href="../style.css" />
           <title>Dream Hook</title>
         </head>
         <body>
-          <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
-            {/* <li className="nav-item" style={{ margin: "auto 5px" }}>
+          <nav class="navbar navbar-light bg-light sticky-top shadow-sm p-2 bg-light">
+            <a class="navbar-brand" href="/">
+              <img src="/mylogo2.png" width="30" height="30" class="d-inline-block align-top mr-2 ml-2" alt="" />
+              Dream Hook
+            </a>
+            <ul className="nav justify-content-end">
+              <li className="nav-item">
+                <a className="btn btn-outline-secondary mr-2" href="/newthread">
+                  New thread
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="btn btn-outline-secondary" href="/logout">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </nav>
+          {changes}
+          {/* <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
+            <li className="nav-item" style={{ margin: "auto 5px" }}>
               <a className="nav-link active" href="/artist/">
                 Login
               </a>
-            </li> */}
-          </ul>
-          <div className="jumbotron">
+            </li>
+          </ul> */}
+          <div className="jumbotron mb-0">
             <small className="lead">@{threadTitleObj[0].username}</small>
             <h4>Title: <strong>{threadTitleObj[0].title}</strong></h4>
             <p>{threadTitleObj[0].authorcontent}</p>
@@ -128,6 +235,16 @@ class Singlethread extends React.Component {
               </div>
             </form>
           </div> */}
+          <footer className="text-center" style={{ right: 0, left: 0, bottom: 0, padding: "1rem", backgroundColor: "#efefef" }}>
+            <div className="container">
+              <span className="" style={{ fontSize: "18px" }}>Like what you see? Hire me.</span> &nbsp;&nbsp;
+              <a href="https://github.com/kingcashthefifth"><i className="fa fa-github" style={{ fontSize: "36px" }}></i></a>&nbsp;&nbsp;
+              <span style={{ fontSize: "36px" }}>&#46;</span>&nbsp;&nbsp;
+              <a href="mailto:cashtsk@gmail.com"><i className="fa fa-envelope" style={{ fontSize: "36px" }}></i></a>&nbsp;&nbsp;
+              <span style={{ fontSize: "36px" }}>&#46;</span>&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/cashtsk/"><i class="fa fa-linkedin" style={{ fontSize: "36px" }}></i></a>
+            </div>
+          </footer>
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

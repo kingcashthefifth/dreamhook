@@ -38,8 +38,8 @@ module.exports = (db) => {
                 db.usersm.mainPageInfo(request, (error2, everything) => {
                     console.log(result.id);
                     response.cookie('dh_session', 'true');
-                    response.cookie('user_id', result.id)
-                    response.redirect('/')
+                    response.cookie('user_id', result.id);
+                    response.redirect('/');
                     // response.send(everything);
                     // response.render('usermain', {
                     //     everything
@@ -52,7 +52,9 @@ module.exports = (db) => {
 
     let logout = (request, response) => {
         response.clearCookie('dh_session');
-        response.clearCookie('user_id')
+        response.clearCookie('user_id');
+        response.clearCookie('changes');
+        response.clearCookie('change_id');
         response.redirect('/')
         // response.send(everything);
         // response.render('usermain', {

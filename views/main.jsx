@@ -25,19 +25,32 @@ class Main extends React.Component {
             integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossOrigin="anonymous"
           />
-          <link rel="stylesheet" href="../style.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+          <link rel="stylesheet" href="../mainstyle.css" />
           <title>Dream Hook</title>
         </head>
         <body>
-          <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
+
+          <nav class="navbar navbar-light bg-light sticky-top shadow-sm p-2 bg-light">
+            <a class="navbar-brand" href="/">
+              <img src="/mylogo2.png" width="30" height="30" class="d-inline-block align-top mr-2 ml-2" alt="" />
+              Dream Hook
+            </a>
+          </nav>
+
+          {/* <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
+            <a href="/" className="navbar-brand">
+              <img className="d-inline-block align-top" src="/mylogo.png" alt="" width="30" height="30" />
+              Dream Hook
+            </a>
             <li className="nav-item" style={{ margin: "auto 5px" }}>
               <a className="nav-link active" href="/">
                 Home
               </a>
             </li>
-          </ul>
+          </ul> */}
           {signupAlert}
-          <div className="jumbotron">
+          <div className="maincolor jumbotron mb-0" style={{ height: "100%" }}>
             <h1 className="display-4 text-center">Welcome to Dream Hook!</h1>
             <p className="lead text-center">Where dream chasers gather.</p>
             <hr className="my-4" />
@@ -58,6 +71,16 @@ class Main extends React.Component {
               </div>
             </form>
           </div>
+          <footer className="text-center" style={{ position: "absolute", right: 0, left: 0, bottom: 0, padding: "1rem", backgroundColor: "#efefef" }}>
+            <div className="container">
+              <span className="" style={{ fontSize: "18px" }}>Like what you see? Hire me.</span> &nbsp;&nbsp;
+              <a href="https://github.com/kingcashthefifth"><i className="fa fa-github" style={{ fontSize: "36px" }}></i></a>&nbsp;&nbsp;
+              <span style={{ fontSize: "36px" }}>&#46;</span>&nbsp;&nbsp;
+              <a href="mailto:cashtsk@gmail.com"><i className="fa fa-envelope" style={{ fontSize: "36px" }}></i></a>&nbsp;&nbsp;
+              <span style={{ fontSize: "36px" }}>&#46;</span>&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/cashtsk/"><i class="fa fa-linkedin" style={{ fontSize: "36px" }}></i></a>
+            </div>
+          </footer>
           <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

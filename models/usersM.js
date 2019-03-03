@@ -5,8 +5,8 @@ module.exports = (dbPoolInstance) => {
         // const threadId = request.params.id
         // const values = [type_id];
         let query = `SELECT * FROM users where id='${request.cookies['user_id']}';`;
-        let query2 = `select threadtitle.id, threadtitle.title, users.username from threadtitle inner join users on (threadtitle.author_id = users.id);`;
-        let query3 = `SELECT * FROM threadcomments;`;
+        let query2 = `select threadtitle.id, threadtitle.title, users.username, threadtitle.author_id from threadtitle inner join users on (threadtitle.author_id = users.id) order by threadtitle.id, threadtitle.id ASC;`;
+        let query3 = `SELECT * FROM threadcomments order by id, id ASC;`;
         let userPageArr = [];
         dbPoolInstance.query(query, (error, queryResult) => {
             if (error) {

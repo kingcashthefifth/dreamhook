@@ -12,7 +12,7 @@ module.exports = (dbPoolInstance) => {
         const userInput = request.body.newcom;
         console.log('addComments threadId: ', request.params.id);
         console.log('addComments userId: ', request.body.userid);
-        let query = `insert into threadcomments (comments, author_id, thread_id) values ($1, $2, $3);`;
+        let query = `insert into threadcomments (comments, author_id, thread_id) values ($1, $2, $3) returning *;`;
         let values = [
             userInput,
             userId,
@@ -28,8 +28,13 @@ module.exports = (dbPoolInstance) => {
             } else {
                 // invoke callback function with results after query has executed
                 if (queryResult.rows.length > 0) {
-                    console.log('query @@@@@@@@:  ', queryResult.rows);
-                    callback(null, queryResult.rows)
+                    console.log('add comment success', queryResult);
+                    let tempArr = [];
+                    tempArr.push(queryResult.rows[0].id);
+                    tempArr.push('addedcomment');
+                    console.log(tempArr);
+                    callback(null, tempArr);
+                    // console.log('query @@@@@@@@:  ', queryResult.rows);
                 } else {
                     callback(null, null);
                 }

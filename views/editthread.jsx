@@ -1,7 +1,9 @@
 var React = require("react");
 
-class Signup extends React.Component {
+class Editthread extends React.Component {
   render() {
+    let userObj = this.props.result[0];
+    let threadTitleObj = this.props.result[1];
     return (
       <html>
         <head>
@@ -21,77 +23,69 @@ class Signup extends React.Component {
           <title>Dream Hook</title>
         </head>
         <body>
-          <nav class="navbar navbar-light bg-light sticky-top shadow-sm p-2 bg-light">
-            <a class="navbar-brand" href="/">
-              <img src="/mylogo2.png" width="30" height="30" class="d-inline-block align-top mr-2 ml-2" alt="" />
+          <nav className="navbar navbar-light bg-light sticky-top shadow-sm p-2 bg-light">
+            <a className="navbar-brand" href="/">
+              <img src="/mylogo2.png" width="30" height="30" className="d-inline-block align-top mr-2 ml-2" alt="" />
               Dream Hook
             </a>
+            <ul className="nav justify-content-end">
+              <li className="nav-item">
+                <a className="btn btn-outline-secondary mr-2" href="/newthread">
+                  New thread
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="btn btn-outline-secondary" href="/logout">
+                  Logout
+                </a>
+              </li>
+            </ul>
           </nav>
-          {/* <ul className="nav nav-pills navHeight sticky-top" style={{ background: "lightgrey", height: "3.5rem" }}>
-            <li className="nav-item" style={{ margin: "auto 5px" }}>
-              <a className="nav-link active" href="/">
-                Home
-              </a>
-            </li>
-          </ul> */}
           <br />
-          <h1 className="ml-5 p-3">Create a new account</h1>
+          <h1 className="ml-5 p-3">Edit thread</h1>
           <br />
           <div className="m-auto" style={{ width: "95%" }}>
-            <form action="/" method="post">
+            <form action={"/edit/" + threadTitleObj[0].id} method="post">
               <div className="form-group">
-                <label htmlFor="titleInput">Username</label>
+                <label htmlFor="titleInput">
+                  Thread title:
+                </label>
                 <input
-                  name="username"
+                  name="title"
                   className="form-control"
                   id="titleInput"
                   aria-describedby="titleHelp"
-                  placeholder="Choose a username"
+                  placeholder="Your thread title"
+                  value={threadTitleObj[0].title}
                 />
                 <small id="titleHelp" className="form-text text-muted">
-                  Your username must consist of at least 4 alphabet letters.
+                  Your title should ideally be a sentence, question, or similar.
                 </small>
               </div>
               <div className="form-group">
-                <div className="row">
+                <label htmlFor="textareaform">
+                  Thread content:
+                </label>
+                <textarea className="form-control" name="authorcontent" id="textareaform" rows="6">{threadTitleObj[0].authorcontent}</textarea>
+                <div className="row mt-3 text-right" style={{ height: "35px" }}>
                   <div className="col">
-                    <input name="firstname" type="text" className="form-control" placeholder="Input your first name" />
-                  </div>
-                  <div className="col">
-                    <input name="lastname" type="text" className="form-control" placeholder="Input your last name" />
+                    <small className="mr-3">@{userObj[0].username}</small>
+                    <button type="button"
+                      className="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                    >Submit</button>
                   </div>
                 </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="ingreInput">Password</label>
-                <input
-                  name="password"
-                  className="form-control"
-                  id="ingreInput"
-                  aria-describedby="ingreHelp"
-                  placeholder="Choose a password"
-                />
-                <small id="ingreHelp" className="form-text text-muted">
-                  Your password must contain at least 8 alphanumeric letters.
-                </small>
-              </div>
-              <div className="form-group">
-                <label htmlFor="instrucTextArea">Email address</label>
-                <input
-                  name="email"
-                  className="form-control"
-                  id="instrucTextArea"
-                  placeholder="Input your email address"
-                />
-              </div>
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-primary"
                 data-toggle="modal"
                 data-target="#exampleModal"
               >
                 Submit
-              </button>
+              </button> */}
               <div
                 className="modal fade"
                 id="exampleModal"
@@ -104,7 +98,7 @@ class Signup extends React.Component {
                   <div className="modal-content">
                     <div className="modal-header">
                       <h5 className="modal-title" id="exampleModalLabel">
-                        Confirmation
+                        Edit confirmation
                       </h5>
                       <button
                         type="button"
@@ -116,7 +110,7 @@ class Signup extends React.Component {
                       </button>
                     </div>
                     <div className="modal-body">
-                      Do you wish to proceed and create this account?
+                      Do you wish to proceed with this edit?
                     </div>
                     <div className="modal-footer">
                       <button
@@ -127,7 +121,7 @@ class Signup extends React.Component {
                         Back
                       </button>
                       <button type="submit" className="btn btn-primary">
-                        Continue
+                        Proceed
                       </button>
                     </div>
                   </div>
@@ -166,4 +160,4 @@ class Signup extends React.Component {
   }
 }
 
-module.exports = Signup;
+module.exports = Editthread;

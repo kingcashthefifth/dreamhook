@@ -7,24 +7,41 @@ module.exports = (db) => {
      */
 
     let index = (request, response) => {
-        db.dreamhookm.getEverything((error, result) => {
-            console.log(result);
-            let sessionCookie = request.cookies['dh_session'];
-            let userCookie = request.cookies['user_id'];
-            if (sessionCookie == undefined) {
+        let sessionCookie = request.cookies['dh_session'];
+        let userCookie = request.cookies['user_id'];
+        if (sessionCookie == undefined || userCookie == undefined) {
+            db.dreamhookm.getEverything((error, result) => {
+                // console.log(result);
                 response.render('main', {
                     result
                 });
-            } else {
-                db.usersm.mainPageInfo(request, (error2, everything) => {
-                    console.log(everything)
-                    // response.send(everything);
+            });
+        } else {
+            db.usersm.mainPageInfo(request, (error2, everything) => {
+                response.clearCookie('thread_id');
+                response.clearCookie('comchanges');
+                response.clearCookie('comchange_id');
+                // console.log(everything)
+                let anyChanges = request.cookies['changes'];
+                let changesId = request.cookies['change_id'];
+                if (anyChanges == undefined) {
                     response.render('usermain', {
                         everything
                     });
-                });
-            };
-        });
+                } else {
+                    let tempArr = [];
+                    tempArr.push(anyChanges);
+                    tempArr.push(changesId);
+                    everything.push(tempArr);
+                    // console.log(everything);
+                    // response.send(everything);
+                    console.log('final data to pass to jsx: ', everything);
+                    response.render('usermain', {
+                        everything
+                    });
+                };
+            });
+        };
     };
 
     let signUp = (request, response) => {
