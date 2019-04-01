@@ -1,6 +1,6 @@
 # DreamHook
 
-Try it out **[here](https://developer.mozilla.org/en-US/docs/Web/JavaScript)**!
+Try it out **[here](https://dream-hook.herokuapp.com)**!
 
 ![screenshot](readme_mats/Screenshot.png)
 
